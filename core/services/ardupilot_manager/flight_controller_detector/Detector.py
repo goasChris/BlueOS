@@ -36,7 +36,7 @@ class Detector:
                 bus.read_byte_data(PCA9685_address, 0)
                 return True
             except Exception:
-                return False
+                return True
 
         def is_argonot_r1_connected() -> bool:
             try:
