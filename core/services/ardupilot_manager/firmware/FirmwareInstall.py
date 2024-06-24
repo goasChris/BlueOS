@@ -43,6 +43,7 @@ def get_correspondent_decoder_platform(current_platform: Platform) -> Union[Boar
         Platform.SITL: BoardType.SITL,
         Platform.Navigator: BoardSubType.LINUX_NAVIGATOR,
         Platform.Argonot: BoardSubType.LINUX_NAVIGATOR,
+        Platform.NaviCube: BoardSubType.LINUX_NAVIGATOR,
     }
     return correspondent_decoder_platform.get(current_platform, BoardType.EMPTY)
 

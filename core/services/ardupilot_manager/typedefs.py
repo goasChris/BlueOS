@@ -111,6 +111,7 @@ class Platform(str, Enum):
     GenericSerial = "GenericSerial"
     Navigator = "navigator"
     Argonot = "argonot"
+    NaviCube = "navicube"
     SITL = get_sitl_platform_name(machine())
 
     @property
@@ -124,6 +125,7 @@ class Platform(str, Enum):
             Platform.GenericSerial: PlatformType.Serial,
             Platform.Navigator: PlatformType.Linux,
             Platform.Argonot: PlatformType.Linux,
+            Platform.NaviCube: PlatformType.Linux,
             Platform.SITL: PlatformType.SITL,
         }
         return platform_types.get(self, PlatformType.Unknown)

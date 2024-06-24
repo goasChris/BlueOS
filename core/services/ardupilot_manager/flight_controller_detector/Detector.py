@@ -59,6 +59,26 @@ class Detector:
                 logger.warning(f"Argonot not detected: {error}")
                 return False
 
+        def is_navicube_connected() -> bool:
+            try:
+                bus = SMBus(1)
+                ADS1115_address = 0x48
+                bus.read_byte_data(ADS1115_address, 0)
+
+                LIS3MDL_address = 0x1E
+                bus.read_byte_data(LIS3MDL_address, 0)
+
+                BME280_address = 0x40
+                bus.read_byte_data(BME280_address, 0)
+
+                bus = SMBus(4)
+                PCA9685_address = 0x40
+                bus.read_byte_data(PCA9685_address, 0)
+                return True
+            except Exception as error:
+                logger.warning(f"NaviCube not detected: {error}")
+                return False
+
         logger.debug("Trying to detect Linux board.")
         if is_navigator_r5_connected():
             logger.debug("Navigator R5 detected.")
@@ -66,6 +86,9 @@ class Detector:
         if is_argonot_r1_connected():
             logger.debug("Argonot R1 detected.")
             return FlightController(name="Argonot", manufacturer="SymbyTech", platform=Platform.Argonot)
+        if is_navicube_connected():
+            logger.debug("NaviCube detected.")
+            return FlightController(name="NaviCube", manufacturer="Remora Robotics", platform=Platform.NaviCube)
         logger.debug("No Linux board detected.")
         return None
 
